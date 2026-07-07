@@ -2,11 +2,11 @@
 
 Static mirror of the Max Omni API portal page from:
 
-https://max-omni.x1rise.site/check-request
+https://gateway-ai.mind-aku.my.id/check-request
 
 The page is available at both:
 
 - `index.html`
 - `check-request/index.html`
 
-API calls are pointed back to `https://max-omni.x1rise.site` so this repository can be hosted as a static site.
+API calls are pointed back to `https://gateway-ai.mind-aku.my.id` so this repository can be hosted as a static site.

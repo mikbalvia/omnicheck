@@ -274,6 +274,16 @@ body.modal-open{overflow:hidden}
   </div>
 </div>
 
+<div class="maintenance-modal-backdrop" id="requestCostModal" role="dialog" aria-modal="true" aria-labelledby="requestCostTitle" aria-describedby="requestCostDesc">
+  <div class="maintenance-modal">
+    <p class="section-label">Pengumuman</p>
+    <h2 id="requestCostTitle">Perubahan perhitungan request</h2>
+    <p id="requestCostDesc">Mulai sekarang, <strong>highest model</strong> seperti <strong>GPT 5.6 Sol</strong>, <strong>GPT-5-6 Luna</strong>, <strong>GPT-5-6 Terra</strong>, <strong>Sonnet 5</strong>, dan <strong>Sonnet 4.8</strong> akan mengurangi <strong>2 request</strong> per respons sukses. Model lain seperti <strong>GLM 5.2</strong> dan <strong>Kimi</strong> tetap mengurangi <strong>1 request</strong>.</p>
+    <div class="alert alert-info" style="margin:0 0 16px"><strong>Butuh bantuan pembayaran?</strong> Jika payment bermasalah, hubungi admin via WhatsApp <a href="https://wa.me/6281990609939?text=Halo%20admin%2C%20payment%20saya%20bermasalah." target="_blank" rel="noopener">+62 819-9060-9939</a> atau klik tombol WhatsApp di pojok kanan bawah.</div>
+    <button type="button" class="btn btn-primary" id="requestCostClose">Saya mengerti</button>
+  </div>
+</div>
+
 <div class="app-shell">
   <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
     <div class="sidebar-brand">
@@ -289,10 +299,10 @@ body.modal-open{overflow:hidden}
       <a class="sidebar-link" href="#test-chat"><span class="ico" aria-hidden="true">✉</span> Uji Koneksi</a>
       <a class="sidebar-link" href="#tutorial"><span class="ico" aria-hidden="true">⚙</span> Integrasi</a>
       <p class="sidebar-nav-label">Legal</p>
-      <a class="sidebar-link" href="https://max-omni.x1rise.site/faq"><span class="ico" aria-hidden="true">?</span> FAQ</a>
-      <a class="sidebar-link" href="https://max-omni.x1rise.site/refund-policy"><span class="ico" aria-hidden="true">↺</span> Refund Policy</a>
-      <a class="sidebar-link" href="https://max-omni.x1rise.site/terms-and-conditions"><span class="ico" aria-hidden="true">§</span> Syarat & Ketentuan</a>
-      <a class="sidebar-link" href="https://max-omni.x1rise.site/kontak"><span class="ico" aria-hidden="true">☎</span> Kontak</a>
+      <a class="sidebar-link" href="https://gateway-ai.mind-aku.my.id/faq"><span class="ico" aria-hidden="true">?</span> FAQ</a>
+      <a class="sidebar-link" href="https://gateway-ai.mind-aku.my.id/refund-policy"><span class="ico" aria-hidden="true">↺</span> Refund Policy</a>
+      <a class="sidebar-link" href="https://gateway-ai.mind-aku.my.id/terms-and-conditions"><span class="ico" aria-hidden="true">§</span> Syarat & Ketentuan</a>
+      <a class="sidebar-link" href="https://gateway-ai.mind-aku.my.id/kontak"><span class="ico" aria-hidden="true">☎</span> Kontak</a>
     </nav>
     <div class="sidebar-footer">
       <a href="https://wa.me/6281990609939?text=Halo%20admin%2C%20saya%20butuh%20bantuan%20API." target="_blank" rel="noopener">Hubungi Support</a>
@@ -334,8 +344,8 @@ body.modal-open{overflow:hidden}
             <h3>Salin Base URL</h3>
             <p>Semua aplikasi AI membutuhkan alamat server yang sama. Salin URL di bawah, lalu tempel ke pengaturan tool pilihan Anda.</p>
             <div class="code-block">
-              <button type="button" class="copy-btn" data-copy="https://max-omni.x1rise.site/v1">Salin</button>
-              <pre>https://max-omni.x1rise.site/v1</pre>
+              <button type="button" class="copy-btn" data-copy="https://max-omni.mind-aku.my.id/v1">Salin</button>
+              <pre>https://max-omni.mind-aku.my.id/v1</pre>
             </div>
           </div>
         </div>
@@ -377,7 +387,7 @@ body.modal-open{overflow:hidden}
     <div class="surface">
       <div class="endpoint-row">
         <span class="label">Base URL</span>
-        <span class="value">https://max-omni.x1rise.site/v1</span>
+        <span class="value">https://max-omni.mind-aku.my.id/v1</span>
       </div>
       <div class="endpoint-row">
         <span class="label">Models endpoint</span>
@@ -503,6 +513,10 @@ body.modal-open{overflow:hidden}
     <h2>Daftar model tersedia</h2>
     <p class="section-desc">Lihat semua model yang dapat digunakan dengan API Key Anda. Berguna saat mengatur nama model di aplikasi pilihan.</p>
 
+    <div class="alert alert-info" style="margin-bottom:16px">
+      <strong>Catatan consume request:</strong> Highest model seperti GPT 5.6 Sol, GPT-5-6 Luna, GPT-5-6 Terra, Sonnet 5, dan Sonnet 4.8 mengurangi <strong>2 request</strong> per respons sukses. Model lain seperti GLM 5.2/Kimi tetap <strong>1 request</strong>.
+    </div>
+
     <div class="surface">
       <button class="btn btn-secondary" id="loadModels" type="button">Muat daftar model</button>
       <div id="modelsOut" class="models"></div>
@@ -534,7 +548,7 @@ body.modal-open{overflow:hidden}
     <p class="section-desc">Pilih aplikasi yang ingin Anda hubungkan. Setiap panduan disusun langkah demi langkah dengan konfigurasi siap salin.</p>
 
     <div class="surface">
-      <div class="alert alert-info">Semua integrasi memerlukan <strong>Base URL</strong> <span class="mono">https://max-omni.x1rise.site/v1</span> dan <strong>API Key</strong> Anda.</div>
+      <div class="alert alert-info">Semua integrasi memerlukan <strong>Base URL</strong> <span class="mono">https://max-omni.mind-aku.my.id/v1</span> dan <strong>API Key</strong> Anda.</div>
 
       <div class="tabs" role="tablist">
         <button class="tab active" data-tab="claude" role="tab">Claude Code</button>
@@ -569,14 +583,14 @@ body.modal-open{overflow:hidden}
             <p>Buat atau edit file <span class="mono">.claude/settings.json</span>. Ganti nilai API Key dengan milik Anda:</p>
             <div class="code-block"><button type="button" class="copy-btn" data-copy='{
   "env": {
-    "ANTHROPIC_BASE_URL": "https://max-omni.x1rise.site/v1",
+    "ANTHROPIC_BASE_URL": "https://max-omni.mind-aku.my.id/v1",
     "ANTHROPIC_AUTH_TOKEN": "MASUKKAN-API-KEY-ANDA",
     "ANTHROPIC_MODEL": "mkr/claude-opus-4.8",
     "ANTHROPIC_SMALL_FAST_MODEL": "mkr/claude-opus-4.8"
   }
 }'>Salin</button><pre>{
   "env": {
-    "ANTHROPIC_BASE_URL": "https://max-omni.x1rise.site/v1",
+    "ANTHROPIC_BASE_URL": "https://max-omni.mind-aku.my.id/v1",
     "ANTHROPIC_AUTH_TOKEN": "MASUKKAN-API-KEY-ANDA",
     "ANTHROPIC_MODEL": "mkr/claude-opus-4.8",
     "ANTHROPIC_SMALL_FAST_MODEL": "mkr/claude-opus-4.8"
@@ -630,7 +644,7 @@ body.modal-open{overflow:hidden}
           <li>
             <p class="step-title"><span class="n">3</span> Tambahkan Base URL</p>
             <p>Tambahkan baris berikut di bagian paling atas file:</p>
-            <div class="code-block"><button type="button" class="copy-btn" data-copy='openai_base_url = "https://max-omni.x1rise.site/v1"'>Salin</button><pre>openai_base_url = "https://max-omni.x1rise.site/v1"</pre></div>
+            <div class="code-block"><button type="button" class="copy-btn" data-copy='openai_base_url = "https://max-omni.mind-aku.my.id/v1"'>Salin</button><pre>openai_base_url = "https://max-omni.mind-aku.my.id/v1"</pre></div>
           </li>
           <li>
             <p class="step-title"><span class="n">4</span> Logout dan buka ulang</p>
@@ -673,7 +687,7 @@ body.modal-open{overflow:hidden}
             <p class="step-title"><span class="n">4</span> Isi wizard sesuai panduan</p>
             <ul>
               <li>Model/auth provider → <strong>Custom Provider</strong></li>
-              <li>API Base URL → <span class="mono">https://max-omni.x1rise.site/v1</span></li>
+              <li>API Base URL → <span class="mono">https://max-omni.mind-aku.my.id/v1</span></li>
               <li>API Key → API Key Anda</li>
               <li>Endpoint compatibility → <strong>OpenAI-compatible</strong></li>
               <li>Model ID → <span class="mono">claude-opus-4.8</span></li>
@@ -705,7 +719,7 @@ body.modal-open{overflow:hidden}
           <li>
             <p class="step-title"><span class="n">3</span> Atur koneksi API</p>
             <ul>
-              <li>Base URL / API Endpoint → <span class="mono">https://max-omni.x1rise.site/v1</span></li>
+              <li>Base URL / API Endpoint → <span class="mono">https://max-omni.mind-aku.my.id/v1</span></li>
               <li>API Key → API Key Anda</li>
               <li>Model → pilih dari daftar model yang tersedia</li>
             </ul>
@@ -746,7 +760,7 @@ body.modal-open{overflow:hidden}
           <li>
             <p class="step-title"><span class="n">5</span> Isi koneksi API</p>
             <ul>
-              <li>API Base URL → <span class="mono">https://max-omni.x1rise.site/v1</span></li>
+              <li>API Base URL → <span class="mono">https://max-omni.mind-aku.my.id/v1</span></li>
               <li>API Key → API Key Anda</li>
               <li>Endpoint compatibility → <strong>OpenAI-compatible</strong></li>
               <li>Endpoint ID / Provider ID → <span class="mono">omni</span></li>
@@ -794,6 +808,11 @@ body.modal-open{overflow:hidden}
 <script src="../assets/qrcode.min.js"></script>
 <script>
 const f=document.getElementById('f'),out=document.getElementById('out'),b=document.getElementById('b'),keyInput=document.getElementById('k');
+const IS_LOCAL_HOST=location.hostname==='127.0.0.1'||location.hostname==='localhost';
+const DEFAULT_API_BASE=IS_LOCAL_HOST?'http://127.0.0.1:20128':location.origin;
+const API_BASE=new URLSearchParams(location.search).get('api')||(IS_LOCAL_HOST?DEFAULT_API_BASE:localStorage.getItem('maxOmniPortal.apiBase'))||DEFAULT_API_BASE;
+try{localStorage.setItem('maxOmniPortal.apiBase',API_BASE)}catch{}
+function apiUrl(path){return API_BASE.replace(/\/$/,'')+path}
 const STORE_PREFIX='maxOmniPortal.v1.';
 const portalStore={
   get(k){try{return localStorage.getItem(STORE_PREFIX+k)}catch{return null}},
@@ -843,6 +862,17 @@ function initPortalSavedFields(){
   buyerEmailInput.addEventListener('input',()=>persistPortalField('saveBuyerEmail','buyerEmail',buyerEmailInput.value));
 }
 initPortalSavedFields();
+(function initRequestCostAnnouncement(){
+  const modal=document.getElementById('requestCostModal');
+  const closeBtn=document.getElementById('requestCostClose');
+  if(!modal||!closeBtn)return;
+  function close(){modal.classList.remove('show');document.body.classList.remove('modal-open')}
+  function open(){modal.classList.add('show');document.body.classList.add('modal-open');setTimeout(()=>closeBtn.focus(),0)}
+  closeBtn.addEventListener('click',close);
+  modal.addEventListener('click',(e)=>{if(e.target===modal)close()});
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&modal.classList.contains('show'))close()});
+  open()
+})();
 function key(){return keyInput.value.trim()}
 function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
 async function readJson(res){
@@ -868,24 +898,20 @@ async function fetchJson(url,opts={},timeoutMs=85000){
   }finally{clearTimeout(t)}
 }
 function auth(){return {'content-type':'application/json','authorization':'Bearer '+key()}}
+function modelRequestCost(id){const s=String(id||'').toLowerCase();return (s.includes('gpt')||s.includes('claude'))?2:1}
 function fmtLimit(v){if(v==null||v==='')return'<span class="value" style="font-size:16px;color:var(--muted)">Unlimited</span>';return'<span class="value">'+Number(v).toLocaleString('id-ID')+'</span>'}
 function limitCards(lim){
   lim=lim||{};
-  if(lim.primaryMaxLimit!=null){
-    return'<div class="grid grid-4" style="margin-top:16px"><div class="stat stat-limit"><span class="label">Limit</span>'+fmtLimit(lim.primaryMaxLimit)+'</div><div class="stat stat-limit"><span class="label">Sisa</span>'+fmtLimit(lim.primaryRemaining)+'</div><div class="stat stat-limit"><span class="label">Terpakai</span><span class="value">'+Number(lim.primaryUsed||0).toLocaleString('id-ID')+'</span></div></div>'
+  const hasLifetime=lim.primaryMaxLimit!=null||lim.primaryRemaining!=null||lim.primaryUsed!=null;
+  if(hasLifetime){
+    return'<div class="grid grid-4" style="margin-top:16px"><div class="stat stat-limit"><span class="label">Limit seumur hidup</span>'+fmtLimit(lim.primaryMaxLimit)+'</div><div class="stat stat-limit"><span class="label">Sisa limit</span>'+fmtLimit(lim.primaryRemaining)+'</div><div class="stat stat-limit"><span class="label">Terpakai</span><span class="value">'+Number(lim.primaryUsed||0).toLocaleString('id-ID')+'</span></div></div>'
   }
-  const maxDay=lim.maxRequestsPerDay??lim.dailyBudget??null;
-  const sisa=lim.remainingToday??null;
-  const maxMin=lim.maxRequestsPerMinute??lim.hourlyBudget??null;
-  const sisaMin=lim.remainingThisHour??null;
-  let h='<div class="grid grid-4" style="margin-top:16px"><div class="stat stat-limit"><span class="label">Limit / hari</span>'+fmtLimit(maxDay)+'</div><div class="stat stat-limit"><span class="label">Sisa hari ini</span>'+fmtLimit(sisa)+'</div>';
-  if(maxMin!=null){h+='<div class="stat stat-limit"><span class="label">Limit / menit</span>'+fmtLimit(maxMin)+'</div><div class="stat stat-limit"><span class="label">Sisa menit ini</span>'+fmtLimit(sisaMin)+'</div>'}
-  return h+'</div>'
+  return'<div class="grid grid-4" style="margin-top:16px"><div class="stat stat-limit"><span class="label">Limit seumur hidup</span>'+fmtLimit(null)+'</div><div class="stat stat-limit"><span class="label">Sisa limit</span>'+fmtLimit(null)+'</div><div class="stat stat-limit"><span class="label">Terpakai</span><span class="value">0</span></div></div>'
 }
 f.onsubmit=async(e)=>{
   e.preventDefault();b.textContent='Memeriksa...';out.innerHTML='';
   try{
-    const r=await fetch('https://max-omni.x1rise.site/api/check-request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({apiKey:key()})});
+    const r=await fetch(apiUrl('/api/check-request'),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({apiKey:key()})});
     const d=await r.json();
     if(!r.ok)throw Error(d.error||'Gagal memeriksa API Key');
     persistPortalField('saveApiKey','apiKey',key());
@@ -899,11 +925,11 @@ document.getElementById('loadModels').onclick=async()=>{
   el.innerHTML='<p class="muted" style="margin-top:12px">Memuat...</p>';
   try{
     if(!key())throw Error('Masukkan API Key di bagian Kuota API terlebih dahulu');
-    const r=await fetch('https://max-omni.x1rise.site/v1/models',{headers:{authorization:'Bearer '+key()}});
+    const r=await fetch(apiUrl('/v1/models'),{headers:{authorization:'Bearer '+key()}});
     const d=await r.json();
     if(!r.ok)throw Error(d?.error?.message||d.error||'Gagal memuat model');
     const arr=Array.isArray(d.data)?d.data:[];
-    el.innerHTML='<div class="alert alert-ok" style="margin-top:12px">'+arr.length+' model tersedia</div>'+arr.map(m=>'<div class="model-item mono">'+esc(m.id||m.name||JSON.stringify(m))+'</div>').join('');
+    el.innerHTML='<div class="alert alert-ok" style="margin-top:12px">'+arr.length+' model tersedia</div>'+arr.map(m=>{const id=m.id||m.name||JSON.stringify(m);const cost=modelRequestCost(id);return'<div class="model-item mono" style="display:flex;justify-content:space-between;gap:12px;align-items:center"><span>'+esc(id)+'</span><span style="font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:700;color:var(--text-secondary);background:#f1f5f9;border:1px solid var(--border-light);border-radius:999px;padding:3px 8px;white-space:nowrap">consume '+cost+' request</span></div>'}).join('');
     if(arr.length){const first=arr[0].id||arr[0].name||'';if(first)document.getElementById('modelId').value=first}
   }catch(err){el.innerHTML='<div class="alert alert-err" style="margin-top:12px">'+esc(err.message)+'</div>'}
 };
@@ -929,7 +955,7 @@ document.getElementById('sendChat').onclick=async()=>{
   try{
     if(!key())throw Error('Masukkan API Key di bagian Kuota API terlebih dahulu');
     const body={model:document.getElementById('modelId').value.trim(),temperature:Number(document.getElementById('temp').value),max_tokens:200,stream:false,messages:[{role:'user',content:document.getElementById('prompt').value}]};
-    const r=await fetch('https://max-omni.x1rise.site/v1/chat/completions',{method:'POST',headers:auth(),body:JSON.stringify(body)});
+    const r=await fetch(apiUrl('/v1/chat/completions'),{method:'POST',headers:auth(),body:JSON.stringify(body)});
     const raw=await r.text();
     const ms=Date.now()-t0;
     if(!r.ok){let msg=raw;try{const e=JSON.parse(raw);msg=e?.error?.message||e.error||raw}catch{}throw Error(msg)}
@@ -1059,7 +1085,7 @@ function updateTopupTotal(){
 }
 async function loadTopupProduct(){
   try{
-    const {r,d}=await fetchJson('https://max-omni.x1rise.site/api/topup/product');
+    const {r,d}=await fetchJson(apiUrl('/api/topup/product'));
     if(!r.ok)throw Error(d.error||'Gagal memuat produk');
     topupProduct=d.product;
     topupMaintenance=!!d.maintenance;
@@ -1098,7 +1124,7 @@ function resetTopupPaymentUi(){
 function invoiceDownloadUrl(txId){
   const k=topupApiKey();
   if(!k||!txId)return null;
-  return 'https://max-omni.x1rise.site/api/topup/invoice/'+encodeURIComponent(txId)+'?apiKey='+encodeURIComponent(k);
+  return apiUrl('/api/topup/invoice/'+encodeURIComponent(txId))+'?apiKey='+encodeURIComponent(k);
 }
 function showTopupSuccess(d,txId){
   stopTopupPoll();
@@ -1141,7 +1167,7 @@ async function renderQrCode(wrap,text){
 }
 async function pollTopupStatus(txId){
   try{
-    const {r,d}=await fetchJson('https://max-omni.x1rise.site/api/topup/status',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({transactionId:txId,apiKey:topupApiKey()})});
+    const {r,d}=await fetchJson(apiUrl('/api/topup/status'),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({transactionId:txId,apiKey:topupApiKey()})});
     const st=document.getElementById('payStatus');
     if(d.status==='success'&&d.credited){
       showTopupSuccess(d,txId);
@@ -1184,7 +1210,7 @@ document.getElementById('btnTopup').onclick=async()=>{
   persistPortalField('saveBuyerEmail','buyerEmail',buyerEmail);
   btn.disabled=true;btn.textContent='Membuat pembayaran...';
   try{
-    const {r,d}=await fetchJson('https://max-omni.x1rise.site/api/topup/create',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({apiKey,packages:Number(topupQty.value),buyerPhone,buyerEmail})});
+    const {r,d}=await fetchJson(apiUrl('/api/topup/create'),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({apiKey,packages:Number(topupQty.value),buyerPhone,buyerEmail})});
     if(!r.ok)throw Error(d.error||'Gagal membuat pembayaran');
     activeTx=d.transactionId;
     hidePayPanels();
