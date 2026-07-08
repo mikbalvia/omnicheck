@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Max Omni — Portal API & Panduan Integrasi</title>
+<title>Mind Aku — Portal API & Panduan Integrasi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -278,7 +278,7 @@ body.modal-open{overflow:hidden}
   <div class="maintenance-modal">
     <p class="section-label">Pengumuman</p>
     <h2 id="requestCostTitle">Perubahan perhitungan request</h2>
-    <p id="requestCostDesc">Mulai sekarang, <strong>highest model</strong> seperti <strong>GPT 5.6 Sol</strong>, <strong>GPT-5-6 Luna</strong>, <strong>GPT-5-6 Terra</strong>, <strong>Sonnet 5</strong>, dan <strong>Sonnet 4.8</strong> akan mengurangi <strong>2 request</strong> per respons sukses. Model lain seperti <strong>GLM 5.2</strong> dan <strong>Kimi</strong> tetap mengurangi <strong>1 request</strong>.</p>
+    <p id="requestCostDesc">Mulai sekarang, <strong>highest model</strong> seperti <strong>GPT 5.6 Sol</strong>, <strong>GPT-5-6 Luna</strong>, <strong>GPT-5-6 Terra</strong>, <strong>Claude Sonnet 5</strong>, dan <strong>Claude Opus 4.8</strong> akan mengurangi <strong>2 request</strong> per respons sukses. Model lain seperti <strong>GLM 5.2</strong> dan <strong>Kimi</strong> tetap mengurangi <strong>1 request</strong>.</p>
     <div class="alert alert-info" style="margin:0 0 16px"><strong>Butuh bantuan pembayaran?</strong> Jika payment bermasalah, hubungi admin via WhatsApp <a href="https://wa.me/6281990609939?text=Halo%20admin%2C%20payment%20saya%20bermasalah." target="_blank" rel="noopener">+62 819-9060-9939</a> atau klik tombol WhatsApp di pojok kanan bawah.</div>
     <button type="button" class="btn btn-primary" id="requestCostClose">Saya mengerti</button>
   </div>
@@ -287,7 +287,7 @@ body.modal-open{overflow:hidden}
 <div class="app-shell">
   <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
     <div class="sidebar-brand">
-      <a class="brand" href="#mulai">Max Omni <span>/ Portal API</span></a>
+      <a class="brand" href="#mulai">Mind Aku <span>/ Portal API</span></a>
       <p class="tagline">Kelola kuota, beli limit, dan integrasi tool AI Anda.</p>
     </div>
     <nav class="sidebar-nav" aria-label="Menu halaman">
@@ -299,10 +299,10 @@ body.modal-open{overflow:hidden}
       <a class="sidebar-link" href="#test-chat"><span class="ico" aria-hidden="true">✉</span> Uji Koneksi</a>
       <a class="sidebar-link" href="#tutorial"><span class="ico" aria-hidden="true">⚙</span> Integrasi</a>
       <p class="sidebar-nav-label">Legal</p>
-      <a class="sidebar-link" href="https://gateway-ai.mind-aku.my.id/faq"><span class="ico" aria-hidden="true">?</span> FAQ</a>
-      <a class="sidebar-link" href="https://gateway-ai.mind-aku.my.id/refund-policy"><span class="ico" aria-hidden="true">↺</span> Refund Policy</a>
-      <a class="sidebar-link" href="https://gateway-ai.mind-aku.my.id/terms-and-conditions"><span class="ico" aria-hidden="true">§</span> Syarat & Ketentuan</a>
-      <a class="sidebar-link" href="https://gateway-ai.mind-aku.my.id/kontak"><span class="ico" aria-hidden="true">☎</span> Kontak</a>
+      <a class="sidebar-link" href="/faq"><span class="ico" aria-hidden="true">?</span> FAQ</a>
+      <a class="sidebar-link" href="/refund-policy"><span class="ico" aria-hidden="true">↺</span> Refund Policy</a>
+      <a class="sidebar-link" href="/terms-and-conditions"><span class="ico" aria-hidden="true">§</span> Syarat & Ketentuan</a>
+      <a class="sidebar-link" href="/kontak"><span class="ico" aria-hidden="true">☎</span> Kontak</a>
     </nav>
     <div class="sidebar-footer">
       <a href="https://wa.me/6281990609939?text=Halo%20admin%2C%20saya%20butuh%20bantuan%20API." target="_blank" rel="noopener">Hubungi Support</a>
@@ -313,7 +313,7 @@ body.modal-open{overflow:hidden}
   <div class="main-area">
     <header class="mobile-topbar">
       <button type="button" class="menu-btn" id="sidebarToggle" aria-label="Buka menu navigasi" aria-expanded="false">☰</button>
-      <a class="brand" href="#mulai">Max Omni</a>
+      <a class="brand" href="#mulai">Mind Aku</a>
     </header>
 
     <main class="main-content">
@@ -344,8 +344,8 @@ body.modal-open{overflow:hidden}
             <h3>Salin Base URL</h3>
             <p>Semua aplikasi AI membutuhkan alamat server yang sama. Salin URL di bawah, lalu tempel ke pengaturan tool pilihan Anda.</p>
             <div class="code-block">
-              <button type="button" class="copy-btn" data-copy="https://max-omni.mind-aku.my.id/v1">Salin</button>
-              <pre>https://max-omni.mind-aku.my.id/v1</pre>
+              <button type="button" class="copy-btn" data-copy="https://gateway-ai.mind-aku.my.id/v1">Salin</button>
+              <pre>https://gateway-ai.mind-aku.my.id/v1</pre>
             </div>
           </div>
         </div>
@@ -363,11 +363,11 @@ body.modal-open{overflow:hidden}
         <dl class="glossary-grid">
           <div class="glossary-item">
             <dt>API Key</dt>
-            <dd>Kunci akses pribadi Anda ke layanan Max Omni. Berfungsi seperti password — rahasia dan tidak untuk dibagikan.</dd>
+            <dd>Kunci akses pribadi Anda ke layanan Mind Aku. Berfungsi seperti password — rahasia dan tidak untuk dibagikan.</dd>
           </div>
           <div class="glossary-item">
             <dt>Base URL</dt>
-            <dd>Alamat server API. Wajib diisi di setiap aplikasi agar tool terhubung ke Max Omni, bukan ke provider lain.</dd>
+            <dd>Alamat server API. Wajib diisi di setiap aplikasi agar tool terhubung ke Mind Aku, bukan ke provider lain.</dd>
           </div>
           <div class="glossary-item">
             <dt>Model</dt>
@@ -387,7 +387,7 @@ body.modal-open{overflow:hidden}
     <div class="surface">
       <div class="endpoint-row">
         <span class="label">Base URL</span>
-        <span class="value">https://max-omni.mind-aku.my.id/v1</span>
+        <span class="value">https://gateway-ai.mind-aku.my.id/v1</span>
       </div>
       <div class="endpoint-row">
         <span class="label">Models endpoint</span>
@@ -548,7 +548,7 @@ body.modal-open{overflow:hidden}
     <p class="section-desc">Pilih aplikasi yang ingin Anda hubungkan. Setiap panduan disusun langkah demi langkah dengan konfigurasi siap salin.</p>
 
     <div class="surface">
-      <div class="alert alert-info">Semua integrasi memerlukan <strong>Base URL</strong> <span class="mono">https://max-omni.mind-aku.my.id/v1</span> dan <strong>API Key</strong> Anda.</div>
+      <div class="alert alert-info">Semua integrasi memerlukan <strong>Base URL</strong> <span class="mono">https://gateway-ai.mind-aku.my.id/v1</span> dan <strong>API Key</strong> Anda.</div>
 
       <div class="tabs" role="tablist">
         <button class="tab active" data-tab="claude" role="tab">Claude Code</button>
@@ -583,14 +583,14 @@ body.modal-open{overflow:hidden}
             <p>Buat atau edit file <span class="mono">.claude/settings.json</span>. Ganti nilai API Key dengan milik Anda:</p>
             <div class="code-block"><button type="button" class="copy-btn" data-copy='{
   "env": {
-    "ANTHROPIC_BASE_URL": "https://max-omni.mind-aku.my.id/v1",
+    "ANTHROPIC_BASE_URL": "https://gateway-ai.mind-aku.my.id/v1",
     "ANTHROPIC_AUTH_TOKEN": "MASUKKAN-API-KEY-ANDA",
     "ANTHROPIC_MODEL": "mkr/claude-opus-4.8",
     "ANTHROPIC_SMALL_FAST_MODEL": "mkr/claude-opus-4.8"
   }
 }'>Salin</button><pre>{
   "env": {
-    "ANTHROPIC_BASE_URL": "https://max-omni.mind-aku.my.id/v1",
+    "ANTHROPIC_BASE_URL": "https://gateway-ai.mind-aku.my.id/v1",
     "ANTHROPIC_AUTH_TOKEN": "MASUKKAN-API-KEY-ANDA",
     "ANTHROPIC_MODEL": "mkr/claude-opus-4.8",
     "ANTHROPIC_SMALL_FAST_MODEL": "mkr/claude-opus-4.8"
@@ -644,7 +644,7 @@ body.modal-open{overflow:hidden}
           <li>
             <p class="step-title"><span class="n">3</span> Tambahkan Base URL</p>
             <p>Tambahkan baris berikut di bagian paling atas file:</p>
-            <div class="code-block"><button type="button" class="copy-btn" data-copy='openai_base_url = "https://max-omni.mind-aku.my.id/v1"'>Salin</button><pre>openai_base_url = "https://max-omni.mind-aku.my.id/v1"</pre></div>
+            <div class="code-block"><button type="button" class="copy-btn" data-copy='openai_base_url = "https://gateway-ai.mind-aku.my.id/v1"'>Salin</button><pre>openai_base_url = "https://gateway-ai.mind-aku.my.id/v1"</pre></div>
           </li>
           <li>
             <p class="step-title"><span class="n">4</span> Logout dan buka ulang</p>
@@ -687,7 +687,7 @@ body.modal-open{overflow:hidden}
             <p class="step-title"><span class="n">4</span> Isi wizard sesuai panduan</p>
             <ul>
               <li>Model/auth provider → <strong>Custom Provider</strong></li>
-              <li>API Base URL → <span class="mono">https://max-omni.mind-aku.my.id/v1</span></li>
+              <li>API Base URL → <span class="mono">https://gateway-ai.mind-aku.my.id/v1</span></li>
               <li>API Key → API Key Anda</li>
               <li>Endpoint compatibility → <strong>OpenAI-compatible</strong></li>
               <li>Model ID → <span class="mono">claude-opus-4.8</span></li>
@@ -719,7 +719,7 @@ body.modal-open{overflow:hidden}
           <li>
             <p class="step-title"><span class="n">3</span> Atur koneksi API</p>
             <ul>
-              <li>Base URL / API Endpoint → <span class="mono">https://max-omni.mind-aku.my.id/v1</span></li>
+              <li>Base URL / API Endpoint → <span class="mono">https://gateway-ai.mind-aku.my.id/v1</span></li>
               <li>API Key → API Key Anda</li>
               <li>Model → pilih dari daftar model yang tersedia</li>
             </ul>
@@ -760,7 +760,7 @@ body.modal-open{overflow:hidden}
           <li>
             <p class="step-title"><span class="n">5</span> Isi koneksi API</p>
             <ul>
-              <li>API Base URL → <span class="mono">https://max-omni.mind-aku.my.id/v1</span></li>
+              <li>API Base URL → <span class="mono">https://gateway-ai.mind-aku.my.id/v1</span></li>
               <li>API Key → API Key Anda</li>
               <li>Endpoint compatibility → <strong>OpenAI-compatible</strong></li>
               <li>Endpoint ID / Provider ID → <span class="mono">omni</span></li>
@@ -1016,6 +1016,7 @@ if(location.hash==='#tutorial'){
 }
 
 /* Topup / beli limit */
+const TOPUP_PRICE_IDR=20000;
 let topupProduct=null,topupPoll=null,activeTx=null,topupMaintenance=false;
 const topupQty=document.getElementById('topupQty');
 const totalPriceEl=document.getElementById('totalPrice');
@@ -1060,6 +1061,7 @@ function refreshTopupAccess(){
 document.getElementById('k').addEventListener('input',refreshTopupAccess);
 
 function formatRp(n){return'Rp '+Number(n||0).toLocaleString('id-ID')}
+function normalizeTopupProduct(p){return p?{...p,priceIdr:TOPUP_PRICE_IDR}:p}
 function formatPackageLabel(p){
   if(!p)return'';
   const req=Number(p.requestsPerPackage||0).toLocaleString('id-ID');
@@ -1087,7 +1089,7 @@ async function loadTopupProduct(){
   try{
     const {r,d}=await fetchJson(apiUrl('/api/topup/product'));
     if(!r.ok)throw Error(d.error||'Gagal memuat produk');
-    topupProduct=d.product;
+    topupProduct=normalizeTopupProduct(d.product);
     topupMaintenance=!!d.maintenance;
     topupQty.max=topupProduct.maxPackages||10;
     document.getElementById('productTitle').textContent=topupProduct.title;
@@ -1210,7 +1212,7 @@ document.getElementById('btnTopup').onclick=async()=>{
   persistPortalField('saveBuyerEmail','buyerEmail',buyerEmail);
   btn.disabled=true;btn.textContent='Membuat pembayaran...';
   try{
-    const {r,d}=await fetchJson(apiUrl('/api/topup/create'),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({apiKey,packages:Number(topupQty.value),buyerPhone,buyerEmail})});
+    const {r,d}=await fetchJson(apiUrl('/api/topup/create'),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({apiKey,packages:Number(topupQty.value),buyerPhone,buyerEmail,priceIdr:TOPUP_PRICE_IDR})});
     if(!r.ok)throw Error(d.error||'Gagal membuat pembayaran');
     activeTx=d.transactionId;
     hidePayPanels();

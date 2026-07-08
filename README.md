@@ -1,12 +1,40 @@
-# Omni Check
+# Mind Aku Check
 
-Static mirror of the Max Omni API portal page from:
+Static mirror of the Mind Aku API portal page.
 
-https://gateway-ai.mind-aku.my.id/check-request
+The portal is available at:
 
-The page is available at both:
+- `/`
 
-- `index.html`
-- `check-request/index.html`
+Legal/support pages are available at:
 
-API calls are pointed back to `https://gateway-ai.mind-aku.my.id` so this repository can be hosted as a static site.
+- `/faq`
+- `/refund-policy`
+- `/terms-and-conditions`
+- `/kontak`
+
+This repository includes a small Node.js server for Cloudflare Tunnel:
+
+- Serves the static portal files.
+- Proxies `/api/*` and `/v1/*` to `https://max-omni.mind-aku.my.id`.
+- Listens on `http://127.0.0.1:20128` by default.
+
+## Run locally
+
+```bash
+npm start
+```
+
+Health check:
+
+```bash
+curl http://127.0.0.1:20128/healthz
+```
+
+## Cloudflare Tunnel
+
+Point the tunnel public hostname `gateway-ai.mind-aku.my.id` to:
+
+```text
+http://127.0.0.1:20128
+```
