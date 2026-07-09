@@ -58,7 +58,7 @@ curl http://127.0.0.1:20128/healthz
 
 ## Cloudflare Tunnel
 
-Point the tunnel public hostname `max-omni.mind-aku.my.id` to:
+Point the tunnel public hostname `gateway-ai.mind-aku.my.id` to:
 
 ```text
 http://127.0.0.1:20128

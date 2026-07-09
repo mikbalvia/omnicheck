@@ -226,12 +226,6 @@ textarea{min-height:96px;resize:vertical}
 .btn-green{background:#059669;color:#fff}
 .btn-green:hover{background:#047857}
 .hidden{display:none!important}
-.maintenance-modal-backdrop{display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.55)}
-.maintenance-modal-backdrop.show{display:flex}
-.maintenance-modal{width:min(420px,100%);background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;box-shadow:0 24px 80px rgba(15,23,42,.28)}
-.maintenance-modal h2{margin:0 0 10px;font-size:22px;line-height:1.25}
-.maintenance-modal p{margin:0 0 18px;color:var(--text-secondary);font-size:14px;line-height:1.6}
-body.modal-open{overflow:hidden}
 
 /* WhatsApp */
 .wa-sticky{position:fixed;right:24px;bottom:24px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none}
@@ -271,34 +265,6 @@ body.modal-open{overflow:hidden}
 </style>
 </head>
 <body>
-
-<div class="maintenance-modal-backdrop" id="maintenanceModal" role="dialog" aria-modal="true" aria-labelledby="maintenanceTitle">
-  <div class="maintenance-modal">
-    <p class="section-label">Maintenance</p>
-    <h2 id="maintenanceTitle">Layanan sedang maintenance</h2>
-    <p>Fitur Buy/QRIS dan akses API Key untuk model AI sementara tidak dapat digunakan dari jam 20.00 sampai 03.00 WIB. Silakan kembali setelah maintenance selesai.</p>
-    <button type="button" class="btn btn-primary" id="maintenanceClose">Mengerti</button>
-  </div>
-</div>
-
-<div class="maintenance-modal-backdrop" id="scheduledMaintenanceModal" role="dialog" aria-modal="true" aria-labelledby="scheduledMaintenanceTitle" aria-describedby="scheduledMaintenanceDesc">
-  <div class="maintenance-modal">
-    <p class="section-label">Pengumuman</p>
-    <h2 id="scheduledMaintenanceTitle">Akan ada maintenance</h2>
-    <p id="scheduledMaintenanceDesc">Layanan akan maintenance pada <strong>10 Juli 2026</strong> pukul <strong>03.00 sampai 05.00 WIB</strong>. Selama periode tersebut, akses API dan beberapa fitur portal dapat terganggu sementara.</p>
-    <button type="button" class="btn btn-primary" id="scheduledMaintenanceClose">Saya mengerti</button>
-  </div>
-</div>
-
-<div class="maintenance-modal-backdrop" id="requestCostModal" role="dialog" aria-modal="true" aria-labelledby="requestCostTitle" aria-describedby="requestCostDesc">
-  <div class="maintenance-modal">
-    <p class="section-label">Pengumuman</p>
-    <h2 id="requestCostTitle">Perubahan perhitungan request</h2>
-    <p id="requestCostDesc">Mulai sekarang, <strong>highest model</strong> seperti <strong>GPT 5.6 Sol</strong>, <strong>GPT-5-6 Luna</strong>, <strong>GPT-5-6 Terra</strong>, <strong>Claude Sonnet 5</strong>, dan <strong>Claude Opus 4.8</strong> akan mengurangi <strong>2 request</strong> per respons sukses. Model lain seperti <strong>GLM 5.2</strong> dan <strong>Kimi</strong> tetap mengurangi <strong>1 request</strong>.</p>
-    <div class="alert alert-info" style="margin:0 0 16px"><strong>Butuh bantuan pembayaran?</strong> Jika payment bermasalah, hubungi admin via WhatsApp <a href="https://wa.me/6281990609939?text=Halo%20admin%2C%20payment%20saya%20bermasalah." target="_blank" rel="noopener">+62 819-9060-9939</a> atau klik tombol WhatsApp di pojok kanan bawah.</div>
-    <button type="button" class="btn btn-primary" id="requestCostClose">Saya mengerti</button>
-  </div>
-</div>
 
 <div class="app-shell">
   <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
@@ -602,15 +568,15 @@ body.modal-open{overflow:hidden}
   "env": {
     "ANTHROPIC_BASE_URL": "https://max-omni.mind-aku.my.id/v1",
     "ANTHROPIC_AUTH_TOKEN": "MASUKKAN-API-KEY-ANDA",
-    "ANTHROPIC_MODEL": "mind/claude-opus-4.8",
-    "ANTHROPIC_SMALL_FAST_MODEL": "mind/claude-opus-4.8"
+    "ANTHROPIC_MODEL": "mind/claude-opus-4-8",
+    "ANTHROPIC_SMALL_FAST_MODEL": "mind/claude-opus-4-8"
   }
 }'>Salin</button><pre>{
   "env": {
     "ANTHROPIC_BASE_URL": "https://max-omni.mind-aku.my.id/v1",
     "ANTHROPIC_AUTH_TOKEN": "MASUKKAN-API-KEY-ANDA",
-    "ANTHROPIC_MODEL": "mind/claude-opus-4.8",
-    "ANTHROPIC_SMALL_FAST_MODEL": "mind/claude-opus-4.8"
+    "ANTHROPIC_MODEL": "mind/claude-opus-4-8",
+    "ANTHROPIC_SMALL_FAST_MODEL": "mind/claude-opus-4-8"
   }
 }</pre></div>
           </li>
@@ -673,7 +639,7 @@ body.modal-open{overflow:hidden}
           </li>
           <li>
             <p class="step-title"><span class="n">6</span> Verifikasi dan pilih model</p>
-            <p>Saat chat pertama kali, status "reconnecting" adalah normal — tunggu hingga respons muncul. Pilih model <strong>5.5 high</strong> (satu-satunya model yang didukung).</p>
+            <p>Saat chat pertama kali, status "reconnecting" adalah normal — tunggu hingga respons muncul. Pilih model <strong>5-5 high</strong> (satu-satunya model yang didukung).</p>
           </li>
         </ol>
         <div class="link-row">
@@ -707,7 +673,7 @@ body.modal-open{overflow:hidden}
               <li>API Base URL → <span class="mono">https://max-omni.mind-aku.my.id/v1</span></li>
               <li>API Key → API Key Anda</li>
               <li>Endpoint compatibility → <strong>OpenAI-compatible</strong></li>
-              <li>Model ID → <span class="mono">claude-opus-4.8</span></li>
+              <li>Model ID → <span class="mono">claude-opus-4-8</span></li>
               <li>Endpoint ID → <span class="mono">omni</span></li>
             </ul>
           </li>
@@ -787,8 +753,8 @@ body.modal-open{overflow:hidden}
             <p class="step-title"><span class="n">6</span> Isi Model ID</p>
             <p>Sesuaikan dengan paket API Key Anda:</p>
             <ul>
-              <li>Paket Opus → <span class="mono">claude-opus-4.8</span></li>
-              <li>Paket GPT → <span class="mono">gpt-5.5</span></li>
+              <li>Paket Opus → <span class="mono">claude-opus-4-8</span></li>
+              <li>Paket GPT → <span class="mono">gpt-5-5</span></li>
             </ul>
           </li>
           <li>
@@ -879,28 +845,6 @@ function initPortalSavedFields(){
   buyerEmailInput.addEventListener('input',()=>persistPortalField('saveBuyerEmail','buyerEmail',buyerEmailInput.value));
 }
 initPortalSavedFields();
-(function initScheduledMaintenanceAnnouncement(){
-  const modal=document.getElementById('scheduledMaintenanceModal');
-  const closeBtn=document.getElementById('scheduledMaintenanceClose');
-  if(!modal||!closeBtn)return;
-  function close(){modal.classList.remove('show');document.body.classList.remove('modal-open')}
-  function open(){modal.classList.add('show');document.body.classList.add('modal-open');setTimeout(()=>closeBtn.focus(),0)}
-  closeBtn.addEventListener('click',close);
-  modal.addEventListener('click',(e)=>{if(e.target===modal)close()});
-  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&modal.classList.contains('show'))close()});
-  open()
-})();
-(function initRequestCostAnnouncement(){
-  const modal=document.getElementById('requestCostModal');
-  const closeBtn=document.getElementById('requestCostClose');
-  if(!modal||!closeBtn)return;
-  function close(){modal.classList.remove('show');document.body.classList.remove('modal-open')}
-  function open(){modal.classList.add('show');document.body.classList.add('modal-open');setTimeout(()=>closeBtn.focus(),0)}
-  closeBtn.addEventListener('click',close);
-  modal.addEventListener('click',(e)=>{if(e.target===modal)close()});
-  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&modal.classList.contains('show'))close()});
-  if(!document.getElementById('scheduledMaintenanceModal')?.classList.contains('show'))open()
-})();
 function key(){return keyInput.value.trim()}
 function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
 async function readJson(res){
@@ -1123,22 +1067,7 @@ const totalRequestsEl=document.getElementById('totalRequests');
 const topupMaintenanceBanner=document.getElementById('topupMaintenanceBanner');
 const buyerPhoneEl=document.getElementById('buyerPhone');
 const buyerEmailEl=document.getElementById('buyerEmail');
-const maintenanceModal=document.getElementById('maintenanceModal');
-const maintenanceClose=document.getElementById('maintenanceClose');
-let maintenanceModalShown=false;
-
-function showMaintenanceModal(){
-  if(!maintenanceModal||maintenanceModalShown)return;
-  maintenanceModalShown=true;
-  maintenanceModal.classList.add('show');
-  document.body.classList.add('modal-open');
-}
-function closeMaintenanceModal(){
-  maintenanceModal?.classList.remove('show');
-  document.body.classList.remove('modal-open');
-}
-maintenanceClose?.addEventListener('click',closeMaintenanceModal);
-maintenanceModal?.addEventListener('click',(e)=>{if(e.target===maintenanceModal)closeMaintenanceModal()});
+function showMaintenanceModal(){}
 
 function topupApiKey(){return key()}
 function setTopupControlsEnabled(on){
