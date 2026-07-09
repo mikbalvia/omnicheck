@@ -13,6 +13,28 @@ const TOPUP_PRODUCT_PATH = '/api/topup/product';
 const TOPUP_CREATE_PATH = '/api/topup/create';
 const upstream = new URL(UPSTREAM_API_BASE);
 
+function envFlag(name, fallback = false) {
+  const raw = process.env[name]?.trim().toLowerCase();
+  if (!raw) return fallback;
+  return ['1', 'true', 'yes', 'on'].includes(raw);
+}
+
+const PAYMENT_GATEWAY_ENABLED = envFlag('PAYMENT_GATEWAY_ENABLED', false);
+const PAYMENT_GATEWAY_URL = (process.env.PAYMENT_GATEWAY_URL || '').trim();
+const PAYMENT_GATEWAY_SECRET = (process.env.PAYMENT_GATEWAY_SECRET || '').trim();
+
+if (PAYMENT_GATEWAY_ENABLED && (!PAYMENT_GATEWAY_URL || !PAYMENT_GATEWAY_SECRET)) {
+  console.warn('[omnicheck] PAYMENT_GATEWAY_ENABLED=true but PAYMENT_GATEWAY_URL or PAYMENT_GATEWAY_SECRET is missing');
+}
+
+function applyPaymentGatewayHeaders(headers) {
+  headers['x-omnicheck-payment-gateway-enabled'] = PAYMENT_GATEWAY_ENABLED ? 'true' : 'false';
+  if (PAYMENT_GATEWAY_ENABLED && PAYMENT_GATEWAY_URL && PAYMENT_GATEWAY_SECRET) {
+    headers['x-omnicheck-payment-gateway-url'] = PAYMENT_GATEWAY_URL;
+    headers['x-omnicheck-payment-gateway-secret'] = PAYMENT_GATEWAY_SECRET;
+  }
+}
+
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
@@ -93,6 +115,7 @@ function proxyApi(req, res, parsedUrl) {
   headers.host = upstream.host;
   headers['x-forwarded-host'] = req.headers.host || '';
   headers['x-forwarded-proto'] = req.headers['x-forwarded-proto'] || 'https';
+  applyPaymentGatewayHeaders(headers);
 
   const options = {
     protocol: upstream.protocol,
@@ -224,6 +247,8 @@ const server = http.createServer((req, res) => {
       service: 'omnicheck',
       upstream: UPSTREAM_API_BASE,
       topupPriceIdr: TOPUP_PRICE_IDR,
+      paymentGatewayEnabled: PAYMENT_GATEWAY_ENABLED,
+      paymentMode: PAYMENT_GATEWAY_ENABLED ? 'gateway' : 'direct',
     });
   }
 
@@ -246,4 +271,5 @@ server.on('error', (err) => {
 server.listen(PORT, HOST, () => {
   console.log(`[omnicheck] listening on http://${HOST}:${PORT}`);
   console.log(`[omnicheck] proxying /api and /v1 to ${UPSTREAM_API_BASE}`);
+  console.log(`[omnicheck] payment mode: ${PAYMENT_GATEWAY_ENABLED ? 'gateway' : 'direct (via omnicheck)'}`);
 });
