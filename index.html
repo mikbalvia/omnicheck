@@ -155,6 +155,13 @@ textarea{min-height:96px;resize:vertical}
 .model-item{padding:10px 0;border-bottom:1px solid var(--border-light);font-size:13px;color:var(--text-secondary)}
 .model-item:last-child{border-bottom:0}
 .out{white-space:pre-wrap;background:var(--code-bg);border-radius:8px;padding:16px;font-size:14px;line-height:1.6;color:var(--text);margin-top:12px}
+.log-table-wrap{margin-top:16px;overflow:auto;border:1px solid var(--border-light);border-radius:8px}
+.log-table{width:100%;border-collapse:collapse;font-size:12px}
+.log-table th,.log-table td{padding:10px;border-bottom:1px solid var(--border-light);text-align:left;white-space:nowrap}
+.log-table th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-secondary);background:#f8fafc}
+.log-table td.mono{font-size:12px}
+.logs-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}
+.logs-meta{font-size:12px;color:var(--muted)}
 
 /* Tabs */
 .tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:24px;overflow-x:auto}
@@ -415,6 +422,7 @@ body.modal-open{overflow:hidden}
         <button class="btn btn-primary" id="b" type="submit">Lihat Kuota</button>
       </form>
       <div id="out"></div>
+      <div id="requestLogs"></div>
     </div>
   </section>
 
@@ -928,8 +936,78 @@ function limitCards(lim){
   }
   return'<div class="grid grid-4" style="margin-top:16px"><div class="stat stat-limit"><span class="label">Limit seumur hidup</span>'+fmtLimit(null)+'</div><div class="stat stat-limit"><span class="label">Sisa limit</span>'+fmtLimit(null)+'</div><div class="stat stat-limit"><span class="label">Terpakai</span><span class="value">0</span></div></div>'
 }
+const logsState={page:1,limit:5,status:'',q:''};
+function logsFilterHtml(){
+  return '<div class="logs-toolbar">'
+    +'<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
+    +'<input id="logsSearch" type="text" placeholder="Filter model/provider/endpoint" style="margin:0;min-width:220px;padding:8px 10px;font-size:12px">'
+    +'<select id="logsStatus" style="margin:0;padding:8px 10px;font-size:12px;border:1px solid var(--border);border-radius:8px;background:#fff">'
+    +'<option value="">Semua status</option><option value="ok">OK</option><option value="success">Success</option><option value="failed">Failed</option><option value="error">Error</option>'
+    +'</select>'
+    +'<button id="logsApplyFilter" type="button" class="btn btn-secondary" style="width:auto;padding:8px 12px;font-size:12px">Terapkan</button>'
+    +'</div>'
+    +'<span class="logs-meta">Today only · 5 / halaman</span>'
+    +'</div>';
+}
+function bindLogsFilterControls(){
+  const q=document.getElementById('logsSearch');
+  const st=document.getElementById('logsStatus');
+  if(q)q.value=logsState.q||'';
+  if(st)st.value=logsState.status||'';
+  document.getElementById('logsApplyFilter')?.addEventListener('click',()=>{
+    logsState.q=(document.getElementById('logsSearch')?.value||'').trim();
+    logsState.status=(document.getElementById('logsStatus')?.value||'').trim();
+    logsState.page=1;
+    loadRequestLogs();
+  });
+}
+function renderRequestLogs(logData){
+  const logsEl=document.getElementById('requestLogs');
+  const logs=Array.isArray(logData?.logs)?logData.logs:[];
+  const pg=logData?.pagination||{};
+  if(!logs.length){
+    logsEl.innerHTML=logsFilterHtml()+'<div class="alert alert-info" style="margin-top:12px">Belum ada log request hari ini untuk API Key ini.</div>';
+    bindLogsFilterControls();
+    return;
+  }
+  const rows=logs.map((l)=>'<tr>'
+    +'<td class="mono">'+esc(new Date(l.timestamp).toLocaleString('id-ID'))+'</td>'
+    +'<td class="mono">'+esc(l.model||'-')+'</td>'
+    +'<td>'+esc((l.provider||'-').toUpperCase())+'</td>'
+    +'<td class="mono">'+esc(l.endpoint||'-')+'</td>'
+    +'<td>'+esc(String(l.status||'-'))+'</td>'
+    +'<td>'+Number(l.promptTokens||0).toLocaleString('id-ID')+'</td>'
+    +'<td>'+Number(l.completionTokens||0).toLocaleString('id-ID')+'</td>'
+    +'</tr>').join('');
+  const canPrev=Number(pg.page||1)>1;
+  const canNext=!!pg.hasMore;
+  logsEl.innerHTML=''
+    +logsFilterHtml()
+    +'<div class="logs-toolbar"><p style="margin:0;font-weight:600">Log request hari ini</p><span class="logs-meta">Halaman '+Number(pg.page||1)+'/'+Math.max(1,Number(pg.totalPages||1))+' · Total '+Number(pg.total||logs.length).toLocaleString('id-ID')+' log</span></div>'
+    +'<div class="log-table-wrap"><table class="log-table"><thead><tr><th>Waktu</th><th>Model</th><th>Provider</th><th>Endpoint</th><th>Status</th><th>Input</th><th>Output</th></tr></thead><tbody>'+rows+'</tbody></table></div>'
+    +'<div class="logs-toolbar"><span class="logs-meta">Menampilkan '+logs.length+' log</span><div style="display:flex;gap:8px"><button type="button" id="logsPrev" class="btn btn-secondary" style="width:auto;padding:8px 12px;font-size:12px"'+(canPrev?'':' disabled')+'>Sebelumnya</button><button type="button" id="logsNext" class="btn btn-secondary" style="width:auto;padding:8px 12px;font-size:12px"'+(canNext?'':' disabled')+'>Berikutnya</button></div></div>';
+  bindLogsFilterControls();
+  document.getElementById('logsPrev')?.addEventListener('click',()=>{if(canPrev){logsState.page=Math.max(1,logsState.page-1);loadRequestLogs();}});
+  document.getElementById('logsNext')?.addEventListener('click',()=>{if(canNext){logsState.page+=1;loadRequestLogs();}});
+}
+async function loadRequestLogs(){
+  const logsEl=document.getElementById('requestLogs');
+  logsEl.innerHTML='<p class="muted" style="margin-top:12px">Memuat log request...</p>';
+  const p=new URLSearchParams({
+    page:String(logsState.page||1),
+    limit:String(logsState.limit||5),
+    today:'1',
+  });
+  if(logsState.status)p.set('status',logsState.status);
+  if(logsState.q)p.set('q',logsState.q);
+  const r=await fetch(apiUrl('/api/request-logs?'+p.toString()),{headers:{authorization:'Bearer '+key()}});
+  const d=await r.json();
+  if(!r.ok)throw Error(d.error||'Gagal memuat log request');
+  logsState.page=Number(d?.pagination?.page||logsState.page||1);
+  renderRequestLogs(d);
+}
 f.onsubmit=async(e)=>{
-  e.preventDefault();b.textContent='Memeriksa...';out.innerHTML='';
+  e.preventDefault();b.textContent='Memeriksa...';out.innerHTML='';document.getElementById('requestLogs').innerHTML='';logsState.page=1;
   try{
     const r=await fetch(apiUrl('/api/check-request'),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({apiKey:key()})});
     const d=await r.json();
@@ -937,6 +1015,7 @@ f.onsubmit=async(e)=>{
     persistPortalField('saveApiKey','apiKey',key());
     const c=d.counts;
     out.innerHTML='<div class="grid"><div class="stat"><span class="label">Total</span><span class="value">'+c.totalRequests.toLocaleString('id-ID')+'</span></div><div class="stat"><span class="label">Hari ini</span><span class="value">'+c.todayRequests.toLocaleString('id-ID')+'</span></div><div class="stat"><span class="label">Jam ini</span><span class="value">'+c.hourRequests.toLocaleString('id-ID')+'</span></div></div><p class="muted" style="margin-top:12px;font-size:12px">'+(d.countsNote?esc(d.countsNote):'Hanya request sukses (HTTP 200) yang dihitung.')+'</p>'+limitCards(d.limits)+'<div class="alert alert-ok" style="margin-top:16px"><strong>'+esc(d.name||d.keyPrefix||d.keyId)+'</strong> <span class="muted">('+esc(d.keyType)+')</span><br>Request terakhir: '+(c.lastRequestAt?new Date(c.lastRequestAt).toLocaleString('id-ID'):'belum ada')+'</div>'
+    await loadRequestLogs();
   }catch(err){out.innerHTML='<div class="alert alert-err">'+esc(err.message)+'</div>'}
   finally{b.textContent='Lihat Kuota'}
 };
