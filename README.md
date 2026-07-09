@@ -16,13 +16,22 @@ Legal/support pages are available at:
 This repository includes a small Node.js server for Cloudflare Tunnel:
 
 - Serves the static portal files.
-- Proxies `/api/*` and `/v1/*` to `https://max-omni.mind-aku.my.id`.
+- Proxies `/api/*` and `/v1/*` to my9router (default `http://127.0.0.1:20127`).
 - Listens on `http://127.0.0.1:20128` by default.
 
 ## Run locally
 
+Start my9router first:
+
 ```bash
-npm start
+cd ../my9router
+npm run dev
+```
+
+Then start the portal proxy:
+
+```bash
+npm run dev
 ```
 
 Health check:
