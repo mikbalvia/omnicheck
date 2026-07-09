@@ -274,6 +274,15 @@ body.modal-open{overflow:hidden}
   </div>
 </div>
 
+<div class="maintenance-modal-backdrop" id="scheduledMaintenanceModal" role="dialog" aria-modal="true" aria-labelledby="scheduledMaintenanceTitle" aria-describedby="scheduledMaintenanceDesc">
+  <div class="maintenance-modal">
+    <p class="section-label">Pengumuman</p>
+    <h2 id="scheduledMaintenanceTitle">Akan ada maintenance</h2>
+    <p id="scheduledMaintenanceDesc">Layanan akan maintenance hari ini pada jam <strong>16.30-17.00 WIB</strong>. Selama periode tersebut, akses API dan beberapa fitur portal dapat terganggu sementara.</p>
+    <button type="button" class="btn btn-primary" id="scheduledMaintenanceClose">Saya mengerti</button>
+  </div>
+</div>
+
 <div class="maintenance-modal-backdrop" id="requestCostModal" role="dialog" aria-modal="true" aria-labelledby="requestCostTitle" aria-describedby="requestCostDesc">
   <div class="maintenance-modal">
     <p class="section-label">Pengumuman</p>
@@ -862,6 +871,17 @@ function initPortalSavedFields(){
   buyerEmailInput.addEventListener('input',()=>persistPortalField('saveBuyerEmail','buyerEmail',buyerEmailInput.value));
 }
 initPortalSavedFields();
+(function initScheduledMaintenanceAnnouncement(){
+  const modal=document.getElementById('scheduledMaintenanceModal');
+  const closeBtn=document.getElementById('scheduledMaintenanceClose');
+  if(!modal||!closeBtn)return;
+  function close(){modal.classList.remove('show');document.body.classList.remove('modal-open')}
+  function open(){modal.classList.add('show');document.body.classList.add('modal-open');setTimeout(()=>closeBtn.focus(),0)}
+  closeBtn.addEventListener('click',close);
+  modal.addEventListener('click',(e)=>{if(e.target===modal)close()});
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&modal.classList.contains('show'))close()});
+  open()
+})();
 (function initRequestCostAnnouncement(){
   const modal=document.getElementById('requestCostModal');
   const closeBtn=document.getElementById('requestCostClose');
@@ -871,7 +891,7 @@ initPortalSavedFields();
   closeBtn.addEventListener('click',close);
   modal.addEventListener('click',(e)=>{if(e.target===modal)close()});
   document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&modal.classList.contains('show'))close()});
-  open()
+  if(!document.getElementById('scheduledMaintenanceModal')?.classList.contains('show'))open()
 })();
 function key(){return keyInput.value.trim()}
 function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
