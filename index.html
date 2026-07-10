@@ -227,6 +227,32 @@ textarea{min-height:96px;resize:vertical}
 .btn-green:hover{background:#047857}
 .hidden{display:none!important}
 
+/* Model fallback popup */
+body.notice-open{overflow:hidden}
+.model-notice{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .18s ease}
+.model-notice.show{opacity:1;pointer-events:auto}
+.model-notice-backdrop{position:absolute;inset:0;background:rgba(15,23,42,.5);backdrop-filter:blur(3px)}
+.model-notice-dialog{position:relative;width:min(100%,520px);max-height:calc(100vh - 40px);overflow:auto;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:0 24px 70px rgba(15,23,42,.28);transform:translateY(10px) scale(.98);transition:transform .18s ease}
+.model-notice.show .model-notice-dialog{transform:translateY(0) scale(1)}
+.model-notice-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border:1px solid var(--border-light);border-radius:999px;background:#fff;color:var(--text-secondary);font-size:20px;line-height:1;cursor:pointer}
+.model-notice-close:hover{background:#f8fafc;color:var(--text)}
+.model-base-note{padding:12px 14px;margin:0 40px 14px 0;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:10px;color:#047857;font-size:13px;line-height:1.55}
+.model-base-note strong{color:#065f46}
+.model-notice-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:999px;color:#1e40af;font-size:12px;font-weight:700;margin-bottom:12px}
+.model-notice h2{font-size:22px;line-height:1.25;margin:0 36px 10px 0;letter-spacing:-.02em}
+.model-notice p{font-size:14px;color:var(--text-secondary);margin:0;line-height:1.65}
+.model-switch-card{margin:18px 0;padding:16px;background:#f8fafc;border:1px solid var(--border-light);border-radius:12px}
+.model-switch-label{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:8px}
+.model-code{display:inline-block;padding:4px 7px;background:#e2e8f0;border-radius:6px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:12px;font-weight:700;color:var(--text);word-break:break-all}
+.model-arrow{font-size:18px;color:var(--muted);margin:10px 0}
+.model-options{display:grid;gap:8px;margin-top:8px}
+.model-option{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;background:#fff;border:1px solid var(--border-light);border-radius:8px}
+.model-option strong{font-size:12px;color:var(--ok-text);white-space:nowrap}
+.model-notice-tip{padding:12px 14px;background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;color:#92400e!important}
+.model-notice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.model-notice-actions .btn{width:auto;padding:10px 16px}
+.model-notice-actions .link-btn{margin:0}
+
 /* WhatsApp */
 .wa-sticky{position:fixed;right:24px;bottom:24px;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none}
 .wa-sticky a{pointer-events:auto}
@@ -258,6 +284,10 @@ textarea{min-height:96px;resize:vertical}
   .wa-sticky-hint{font-size:12px;max-width:220px}
   .wa-btn{padding:14px 16px;border-radius:50%}
   .wa-label{display:none}
+  .model-notice{padding:14px}
+  .model-notice-dialog{padding:20px;max-height:calc(100vh - 28px)}
+  .model-option{align-items:flex-start;flex-direction:column}
+  .model-notice-actions .btn,.model-notice-actions .link-btn{width:100%;justify-content:center}
 }
 @media(min-width:641px){
   .sidebar-backdrop{display:none!important}
@@ -265,6 +295,33 @@ textarea{min-height:96px;resize:vertical}
 </style>
 </head>
 <body>
+
+<div class="model-notice" id="modelFallbackNotice" aria-hidden="true">
+  <div class="model-notice-backdrop" data-model-notice-close></div>
+  <section class="model-notice-dialog" role="dialog" aria-modal="true" aria-labelledby="modelNoticeTitle" aria-describedby="modelNoticeDesc" tabindex="-1">
+    <button type="button" class="model-notice-close" data-model-notice-close aria-label="Tutup pemberitahuan">×</button>
+    <div class="model-base-note"><strong>Jangan lupa set Base URL:</strong><br><span class="model-code">https://max-omni.mind-aku.my.id/v1</span></div>
+    <span class="model-notice-badge">Info penggunaan model</span>
+    <h2 id="modelNoticeTitle">Model bermasalah? Ganti sementara ke model lain.</h2>
+    <p id="modelNoticeDesc">Jika satu model sedang lambat, padat, atau tidak merespons, Anda tidak perlu mengganti API Key maupun Base URL. Cukup ubah nama model di tool yang digunakan.</p>
+    <div class="model-switch-card" aria-label="Contoh alternatif model">
+      <span class="model-switch-label">Contoh pergantian</span>
+      <span class="model-code">mind/claude-opus-4-8</span>
+      <div class="model-arrow" aria-hidden="true">↓</div>
+      <div class="model-options">
+        <div class="model-option"><span class="model-code">mind/gpt-5-5</span><strong>GPT · 2 req</strong></div>
+        <div class="model-option"><span class="model-code">mind/glm-5-2</span><strong>Hemat · 1 req</strong></div>
+        <div class="model-option"><span class="model-code">mind/deepseek-v4-pro</span><strong>Hemat · 1 req</strong></div>
+        <div class="model-option"><span class="model-code">mind/auto</span><strong>Paling aman</strong></div>
+      </div>
+    </div>
+    <p class="model-notice-tip"><strong>Rekomendasi:</strong> gunakan <span class="model-code">mind/auto</span> bila ingin opsi paling stabil. Untuk hemat kuota, pilih model selain GPT dan Claude seperti GLM atau DeepSeek — umumnya hanya consume <strong>1 request</strong> per respons sukses.</p>
+    <div class="model-notice-actions">
+      <button type="button" class="btn btn-primary" id="modelNoticeOk">Saya mengerti</button>
+      <a class="link-btn" href="#daftar-model" data-model-notice-close>Lihat daftar model</a>
+    </div>
+  </section>
+</div>
 
 <div class="app-shell">
   <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
@@ -497,7 +554,7 @@ textarea{min-height:96px;resize:vertical}
     <p class="section-desc">Lihat semua model yang dapat digunakan dengan API Key Anda. Berguna saat mengatur nama model di aplikasi pilihan.</p>
 
     <div class="alert alert-info" style="margin-bottom:16px">
-      <strong>Catatan consume request:</strong> Highest model seperti GPT 5.6 Sol, GPT-5-6 Luna, GPT-5-6 Terra, Sonnet 5, dan Sonnet 4.8 mengurangi <strong>2 request</strong> per respons sukses. Model lain seperti GLM 5.2/Kimi tetap <strong>1 request</strong>.
+      <strong>Catatan consume request:</strong> Model GPT/Claude tertentu seperti GPT 5.6 Sol, GPT-5-6 Luna, GPT-5-6 Terra, Sonnet 5, dan Sonnet 4.8 mengurangi <strong>2 request</strong> per respons sukses. Selain GPT dan Claude, model seperti GLM 5.2, Kimi, atau DeepSeek lebih hemat: hanya <strong>1 request</strong>.
     </div>
 
     <div class="surface">
@@ -804,6 +861,30 @@ const portalStore={
   getBool(k){return portalStore.get(k)==='1'},
   setBool(k,on){on?portalStore.set(k,'1'):portalStore.remove(k)}
 };
+function initModelFallbackNotice(){
+  const modal=document.getElementById('modelFallbackNotice');
+  if(!modal)return;
+  const dialog=modal.querySelector('.model-notice-dialog');
+  const seenKey=STORE_PREFIX+'modelFallbackNoticeSeen';
+  const open=()=>{
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden','false');
+    document.body.classList.add('notice-open');
+    setTimeout(()=>dialog?.focus(),20);
+  };
+  const close=()=>{
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('notice-open');
+    try{sessionStorage.setItem(seenKey,'1')}catch{}
+  };
+  modal.querySelectorAll('[data-model-notice-close]').forEach(el=>el.addEventListener('click',close));
+  document.getElementById('modelNoticeOk')?.addEventListener('click',close);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('show'))close()});
+  let seen=false;try{seen=sessionStorage.getItem(seenKey)==='1'}catch{}
+  if(!seen)setTimeout(open,450);
+}
+initModelFallbackNotice();
 function persistPortalField(flagKey,valueKey,value){
   if(!portalStore.getBool(flagKey))return;
   const v=String(value||'').trim();
